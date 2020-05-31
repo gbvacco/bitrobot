@@ -60,11 +60,12 @@ function getPrice() {
 
 function getExchanges() {
     var message = '';
-
+    message += `Veja as cotações nas corretoras: \n \n`;
     message += 'Corretoras Brasileiras: \n';
     Object.values(brazilExchanges).forEach(function (value) {
         message += `${value.exchange_name} - COMPRA: ${value.ticker_buy} VENDA: ${value.ticker_sell} \n`;
     });
+    message += '\n \n ============= \n \n';
     message += 'Corretoras Americanas: \n';
     Object.values(usaExchanges).forEach(function (value) {
         message += `${value.exchange_name} - COMPRA: ${value.ticker_buy} VENDA: ${value.ticker_sell} \n`;
@@ -74,18 +75,18 @@ function getExchanges() {
 
 // Answer message
 bot.on('message', (msg) => {
+    getPrice();
     const chatId = msg.chat.id;
 
     // send a message to the chat acknowledging receipt of their message
     bot.sendMessage(chatId, `A diferença do bitcoin EUA/BR em porcentagem é de ${diffPercentage}%`);
     bot.sendMessage(chatId, `O preço médio no Brasil é de US$${round(brazilPrice)} e nos EUA é de US$${round(usaPrice)}`);
-    bot.sendMessage(chatId, `Veja as cotações nas corretoras:`);
     bot.sendMessage(chatId, getExchanges());
 });
 
 
 // Cron the task to check price for each 5 seconds
-var task = cron.schedule('* * * * *', () => {
+var task = cron.schedule('5 * * * *', () => {
     getPrice();
 }, {
     scheduled: false
