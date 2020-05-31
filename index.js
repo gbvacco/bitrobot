@@ -66,7 +66,7 @@ function getExchanges() {
         message += `${value.exchange_name} - COMPRA: ${value.ticker_buy} VENDA: ${value.ticker_sell} \n`;
     });
     message += 'Corretoras Americanas: \n';
-    Object.values(brazilExchanges).forEach(function (value) {
+    Object.values(usaExchanges).forEach(function (value) {
         message += `${value.exchange_name} - COMPRA: ${value.ticker_buy} VENDA: ${value.ticker_sell} \n`;
     });
     return message;
