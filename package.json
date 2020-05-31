@@ -12,6 +12,7 @@
     "aws": "0.0.3-2",
     "axios": "^0.19.2",
     "node-cron": "^2.0.3",
+    "node-telegram-bot-api": "^0.50.0",
     "telegram-send-message": "0.0.4"
   }
 }
