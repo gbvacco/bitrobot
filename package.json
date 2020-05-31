@@ -1,0 +1,17 @@
+{
+  "name": "bitrobo",
+  "version": "1.0.0",
+  "description": "bitcoin variation price between countries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws": "0.0.3-2",
+    "axios": "^0.19.2",
+    "node-cron": "^2.0.3",
+    "telegram-send-message": "0.0.4"
+  }
+}
