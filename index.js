@@ -1,16 +1,19 @@
+// IMPORTS
 const axios = require('axios').default;
 const cron = require('node-cron');
 const TelegramBot = require('node-telegram-bot-api');
-const telegramChatBot = '787569456:AAHN9Dd5vy-nML9SD1hOX1xBtXPyV7okACg';
-const telegramChatBotID = '-386477240';
+const env = require('dotenv').config();
+
+const telegramChatBot = process.env.TELEGRAM_BOT_ID;
+const telegramChatBotID = process.env.TELEGRAM_CODE;
 const bot = new TelegramBot(telegramChatBot, { polling: true });
 
-var brazilPrice = 0;
-var brazilExchanges = [];
-var usaPrice = 0;
-var usaExchanges = [];
+let brazilPrice = 0;
+let brazilExchanges = [];
+let usaPrice = 0;
+let usaExchanges = [];
 
-var diffPercentage = 0;
+let diffPercentage = 0;
 
 // Calc the diff price in percentage
 function percentageDiff(a, b) {
@@ -46,15 +49,12 @@ function getPrice() {
             console.log('DIFERENÇA: ' + diffPercentage);
 
             if (diffPercentage >= 5) {
-                axios.post(`https://api.telegram.org/bot${telegramChatBot}/sendMessage?chat_id=${telegramChatBotID}&text=Diferenca do bitcoin EUA/BR em porcentagem: ${diffPercentage}%`);
+                axios.post(`${process.env.TELEGRAM_URL}${telegramChatBot}/sendMessage?chat_id=${telegramChatBotID}&text=Diferenca do bitcoin EUA/BR em porcentagem: ${diffPercentage}%`);
             }
         })
         .catch(function (error) {
             // handle error
             console.log(error);
-        })
-        .finally(function () {
-            // always executed
         });
 }
 
